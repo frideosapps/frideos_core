@@ -1,0 +1,15 @@
+name: frideos_core
+author: Francesco Mineo <frideosapps@gmail.com>
+homepage: https://github.com/frideosapps/frideos_core
+description: A library for streams, BLoC pattern, tunnel pattern, timing and animations. Core of the frideos package.
+version: 0.4.1
+
+environment:
+  sdk: ">=2.0.0 <3.0.0"
+
+dependencies:
+  rxdart: ^0.18.0
+  meta: ^1.1.6
+
+dev_dependencies:
+  test: ^1.3.0

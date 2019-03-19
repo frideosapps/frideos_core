@@ -12,7 +12,7 @@ incrementCounter() {
 
 // View
 ValueBuilder<int>(
-  stream: bloc.count, // no need of the outStream getter with ValueBuilder
+  streamed: bloc.count, // no need of the outStream getter with ValueBuilder
   builder: (context, snapshot) =>
     Text('Value: ${snapshot.data}'),
   noDataChild: Text('NO DATA'),
@@ -27,8 +27,7 @@ RaisedButton(
 
 // As an alternative:
 //
-// StreamedWidget<int>(
-//    initialData: bloc.count.value
+// StreamedWidget<int>(    
 //    stream: bloc.count.outStream,
 //    builder: (context, snapshot) => Text('Value: ${snapshot.data}'),
 //    noDataChild: Text('NO DATA'),
@@ -301,7 +300,7 @@ startPeriodic() {
             children: <Widget>[
               Container(height: 20.0,),
                ValueBuilder<AnimatedStatus>(
-                stream: bloc.scaleAnimation.status,
+                streamed: bloc.scaleAnimation.status,
                 builder: (context, snapshot) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -336,7 +335,7 @@ startPeriodic() {
               ),
               Expanded(
                 child: ValueBuilder<double>(
-                    stream: bloc.scaleAnimation,
+                    streamed: bloc.scaleAnimation,
                     builder: (context, snapshot) {
                       return Transform.scale(
                           scale: snapshot.data,

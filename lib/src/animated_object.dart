@@ -170,8 +170,7 @@ class AnimatedObject<T> implements StreamedObject<T> {
   void start(Function(Timer t) callback) {
     if (!timer.isTimerActive) {
       animation.value = initialValue;
-      timer.startPeriodic(
-          Duration(milliseconds: interval), (Timer t) => callback(t));
+      timer.startPeriodic(Duration(milliseconds: interval), callback);
       status.value = AnimatedStatus.active;
     }
   }

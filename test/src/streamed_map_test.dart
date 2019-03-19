@@ -6,35 +6,25 @@ import 'package:frideos_core/frideos_core.dart';
 
 void main() {
   group('StreamedMap', () {
-    test('addKey', () {
+    test('addKey', () async {
       final streamedMap = StreamedMap<int, String>();
-      streamedMap.value = Map();
+      streamedMap.value = {};
 
-      Timer.run(() {
-        streamedMap
-          ..addKey(1, 'first')
-          ..addKey(2, 'second')
-          ..addKey(3, 'third');
-      });
+      streamedMap..addKey(1, 'first')..addKey(2, 'second')..addKey(3, 'third');
 
-      expect(
+      await expectLater(
         streamedMap.outStream,
         emits({1: 'first', 2: 'second', 3: 'third'}),
       );
     });
 
-    test('addKey with initialData', () {
+    test('addKey with initialData', () async {
       final streamedMap =
           StreamedMap<int, String>(initialData: {33: '33', 66: '66'});
 
-      Timer.run(() {
-        streamedMap
-          ..addKey(1, 'first')
-          ..addKey(2, 'second')
-          ..addKey(3, 'third');
-      });
+      streamedMap..addKey(1, 'first')..addKey(2, 'second')..addKey(3, 'third');
 
-      expect(
+      await expectLater(
         streamedMap.outStream,
         emits({33: '33', 66: '66', 1: 'first', 2: 'second', 3: 'third'}),
       );

@@ -129,7 +129,7 @@ class StreamedMapBloc extends BlocBase with Validators {
     streamedKey.debugMode();
   }
 
-  final streamedMap = StreamedMap<int, String>(initialData: Map());
+  final streamedMap = StreamedMap<int, String>(initialData: {});
   final streamedText = StreamedTransformed<String, String>();
   final streamedKey = StreamedTransformed<String, int>();
 
@@ -164,9 +164,7 @@ As you can see the code is more clean, easier to read and to mantain.
 
 It's the simplest class that implements the `StreamedObject` interface.
 
-Every time a new value is set, this is compared to the oldest one and if it is different, it is sent to stream.
-
-Used in tandem with `ValueBuilder` it automatically triggers the rebuild of the widgets returned by its builder.
+Every time a new value is set, this is compared to the oldest one and if it is different, it is sent to stream. Used in tandem with `ValueBuilder` it automatically triggers the rebuild of the widgets returned by its builder.
 
 So for example, instead of:
 
@@ -181,7 +179,7 @@ It becomes just:
 counter.value += 1;
 ```
 
-It can be used even with `StreamedWidget` and `StreamBuilder` by using its stream getter `outStream`. In this case, it is necessary to pass to the `initialData` parameter the current value of the `StreamedValue` (e.g. using the getter `value`).
+It can be used even with `StreamedWidget` and `StreamBuilder` by using its stream getter `outStream`.
 
 N.B. when the type is not a basic type (e.g int, double, String etc.) and the value of a property of the object is changed, it is necessary to call the `refresh` method to update the stream.
 
@@ -197,7 +195,7 @@ incrementCounter() {
 
 // View
 ValueBuilder<int>(
-  stream: bloc.count, // no need of the outStream getter with ValueBuilder
+  streamed: bloc.count, // no need of the outStream getter with ValueBuilder
   builder: (context, snapshot) =>
     Text('Value: ${snapshot.data}'),
   noDataChild: Text('NO DATA'),
@@ -212,8 +210,7 @@ RaisedButton(
 
 // As an alternative:
 //
-// StreamedWidget<int>(
-//    initialData: bloc.count.value
+// StreamedWidget<int>(    
 //    stream: bloc.count.outStream,
 //    builder: (context, snapshot) => Text('Value: ${snapshot.data}'),
 //    noDataChild: Text('NO DATA'),
@@ -575,7 +572,7 @@ From the AnimatedObject example of the [frideos](https://pub.dartlang.org/packag
             children: <Widget>[
               Container(height: 20.0,),
                ValueBuilder<AnimatedStatus>(
-                stream: bloc.scaleAnimation.status,
+                streamed: bloc.scaleAnimation.status,
                 builder: (context, snapshot) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -610,7 +607,7 @@ From the AnimatedObject example of the [frideos](https://pub.dartlang.org/packag
               ),
               Expanded(
                 child: ValueBuilder<double>(
-                    stream: bloc.scaleAnimation,
+                    streamed: bloc.scaleAnimation,
                     builder: (context, snapshot) {
                       return Transform.scale(
                           scale: snapshot.data,

@@ -13,12 +13,12 @@ class Utils {
     int index = 0;
     Timer timer;
 
-    int refresh =
+    final int refresh =
         duration != null ? (duration ~/ text.length).toInt() : milliseconds;
 
     timer = Timer.periodic(Duration(milliseconds: refresh), (Timer t) {
       if (index <= text.length - 1) {
-        var toShow = text.substring(0, index + 1);
+        final toShow = text.substring(0, index + 1);
         stream.value = toShow;
         index++;
       } else {
@@ -34,7 +34,7 @@ class Utils {
     Timer timer;
     timer = Timer.periodic(Duration(milliseconds: milliseconds), (Timer t) {
       if (index <= text.length - 1) {
-        var toShow = text.substring(0, index + 1);
+        final toShow = text.substring(0, index + 1);
         callback(toShow);
         index++;
       } else {

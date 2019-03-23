@@ -1,3 +1,9 @@
+## Version 0.4.2+1 (23-03-19)
+- Code refactoring
+- Added some tests
+- Updated README.md
+
+
 ## Version 0.4.2 (19-03-19)
 - Code refactoring
 - `README.md` updated

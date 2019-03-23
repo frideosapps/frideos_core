@@ -88,7 +88,9 @@ class StreamedValue<T> implements StreamedObject<T> {
 
     stream.stream.listen((e) {
       _lastValue = e;
-      _onChange(e);
+      if (_onChange != null) {
+        _onChange(e);
+      }
     });
 
     if (initialData != null) {
@@ -121,7 +123,7 @@ class StreamedValue<T> implements StreamedObject<T> {
   bool _debugMode = false;
 
   /// This function will be called every time the stream updates.
-  Function _onChange = (T data) {};
+  Function(T data) _onChange;
 
   /// Getter for the last value emitted by the stream
   @override
@@ -464,12 +466,14 @@ class TimerObject extends StreamedValue<int> {
 ///
 ///
 ///
-class StreamedTransformed<T, S> implements StreamedObject {
+class StreamedTransformed<T, S> implements StreamedObject<T> {
   StreamedTransformed() {
     stream = BehaviorSubject<T>()
       ..listen((e) {
         _lastValue = e;
-        _onChange(e);
+        if (_onChange != null) {
+          _onChange(e);
+        }
       });
   }
 
@@ -508,7 +512,7 @@ class StreamedTransformed<T, S> implements StreamedObject {
   set value(T value) => inStream(value);
 
   /// This function will be called every time the stream updates.
-  Function _onChange = (T data) {};
+  Function(T data) _onChange;
 
   /// This function will be called every time the stream updates.
   void onChange(Function(T data) onDataChanged) {

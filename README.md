@@ -1,6 +1,6 @@
 # frideos_core [![pub package](https://img.shields.io/pub/v/frideos_core.svg)](https://pub.dartlang.org/packages/frideos_core)
 
-A library for streams, BLoC pattern, tunnel pattern, timing and animations. Core of the [frideos](https://pub.dartlang.org/packages/frideos) package.
+A library for streams, BLoC pattern, tunnel pattern, timing and animations. Core of the [frideos](https://pub.dartlang.org/packages/frideos) and [frideos_light](https://pub.dartlang.org/packages/frideos_light) package.
 
 #### [Classes for streams and BLoC pattern](#streams-and-bloc-pattern):
 
@@ -34,7 +34,7 @@ A library for streams, BLoC pattern, tunnel pattern, timing and animations. Core
 
 Utility classes to work with streams and BLoC pattern.
 
-This example (you can find it in the example folder of the repository of the [frideos](https://pub.dartlang.org/packages/frideos) package) shows how to use some classes of this library, and a comparison code without it. It is just a page with two textfields to add a key/value pair to a map. The map is then used to drive a `ListView.builder` showing all the pairs.
+This example (you can find it in the [frideos_examples](https://github.com/frideosapps/frideos_examples) repository) shows how to use some classes of this library, and a comparison code without it. It is just a page with two textfields to add a key/value pair to a map. The map is then used to drive a `ListView.builder` showing all the pairs.
 
 #### Common code
 
@@ -517,7 +517,7 @@ startPeriodic() {
 
 This class is used to update a value over a period of time. Useful to handle animations using the BLoC pattern.
 
-From the AnimatedObject example of the [frideos](https://pub.dartlang.org/packages/frideos) package for Flutter:
+From the AnimatedObject example of the [frideos_examples](https://github.com/frideosapps/frideos_examples):
 
 ![AnimatedObject](https://i.imgur.com/10nfh0R.gif)
 
@@ -627,36 +627,3 @@ From the AnimatedObject example of the [frideos](https://pub.dartlang.org/packag
           ),
         ),
 ```
-
-## Examples
-Examples created with Flutter using the [frideos](https://pub.dartlang.org/packages/frideos) package.
-
-### 1. [General](https://github.com/frideosapps/frideos_flutter/tree/master/example)
-- Streamed objects
-- Streamed collections
-- TimerObject: a simple stopwatch
-- StagedObject
-- StagedWidget
-- AnimatedObject
-- Multiple selection and tunnel pattern (to share data between two blocs)
-- LinearTransition
-- CurvedTransition
-- Blur (fixed, in, out, animated)
-- WavesWidget
-- Sliders
-
-### 2. [Theme changer](https://github.com/frideosapps/theme_changer)
-
-A simple starter app with a drawer, app state management, dynamic theme changer and persistent theme using the sharedpreferences.
-
-### 3. [Counter](https://github.com/frideosapps/counter)
-
-A simple app using the BLoC pattern showing a counter implemented with this library.
-
-### 4. [Blood pressure](https://github.com/frideosapps/bloodpressure)
-
-An example of a medical app built with Flutter for the classification of the arterial blood pressure.
-
-### 5. [Pair game](https://github.com/frideosapps/pair_game)
-
-A simple pair game (multiple selections, animations, tunnel pattern).

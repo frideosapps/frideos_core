@@ -1,6 +1,6 @@
-import 'streamed_value.dart';
 import 'streamed_list.dart';
 import 'streamed_map.dart';
+import 'streamed_value.dart';
 
 /// Used to make a one-way tunnel beetween two blocs (from blocA to
 /// a StremedValue on blocB).

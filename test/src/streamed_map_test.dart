@@ -32,7 +32,7 @@ void main() {
 
     test('Clear, removeKey, length', () {
       final streamedMap = StreamedMap<int, String>();
-      streamedMap.value = Map();
+      streamedMap.value = {};
 
       streamedMap.addKey(1, 'first');
       expect(streamedMap.value[1], 'first');
@@ -49,6 +49,16 @@ void main() {
       expect(streamedMap.value.length, 0);
 
       streamedMap.dispose();
+    });
+
+    test('onChange', () {
+      final streamedMap = StreamedMap<int, String>();
+
+      streamedMap.value = {1: 'a', 3: 'b', 5: 'c'};
+
+      streamedMap.onChange((map) {
+        expect(map, {1: 'a', 3: 'b', 5: 'c'});
+      });
     });
   });
 }

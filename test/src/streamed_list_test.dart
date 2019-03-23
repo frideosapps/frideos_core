@@ -36,7 +36,7 @@ void main() {
 
     test('addAll', () async {
       final streamedList = StreamedList<int>();
-      streamedList.value = List<int>();
+      streamedList.value = [];
 
       streamedList.addAll([1, 2, 3, 4, 5]);
 
@@ -46,9 +46,9 @@ void main() {
       );
     });
 
-    test('Clear, removeAt, length', () {
+    test('Clear, removeAt, removeElement length', () {
       final streamedList = StreamedList<int>();
-      streamedList.value = List<int>();
+      streamedList.value = [];
 
       streamedList.addElement(99);
 
@@ -67,6 +67,31 @@ void main() {
         ..clear();
       expect(streamedList.length, 0);
       expect(streamedList.value.length, 0);
+
+      streamedList
+        ..addElement(99)
+        ..removeElement(99);
+      expect(streamedList.value.length, 0);
+    });
+
+    test('Replace, replaceAt', () {
+      final streamedList = StreamedList<int>(initialData: [1, 3, 45, 78, 87]);
+
+      streamedList.replace(3, 4);
+      expect(streamedList.value.where((e) => e == 5), isNotNull);
+
+      streamedList.replaceAt(0, 2);
+      expect(streamedList.value.first, 2);
+    });
+
+    test('onChange', () {
+      final streamedList = StreamedList<int>();
+
+      streamedList.value = [1, 3, 5];
+
+      streamedList.onChange((list) {
+        expect(list, [1, 3, 5]);
+      });
     });
   });
 }

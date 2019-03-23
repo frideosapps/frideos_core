@@ -24,6 +24,16 @@ void main() {
       );
     });
 
+    test('onChange', () {
+      final streamedValue = StreamedValue<int>();
+
+      streamedValue.value = 123;
+
+      streamedValue.onChange((value) {
+        expect(value, 123);
+      });
+    });
+
     //
     // StreamedTransformed test
     //
@@ -32,7 +42,7 @@ void main() {
 
       final validateKey =
           StreamTransformer<String, int>.fromHandlers(handleData: (key, sink) {
-        var k = int.tryParse(key);
+        final k = int.tryParse(key);
         if (k != null) {
           sink.add(k);
         } else {
@@ -46,6 +56,10 @@ void main() {
 
       streamedTransformed.outTransformed.listen((value) {
         expect(value, 157);
+      });
+
+      streamedTransformed.onChange((value) {
+        expect(value, '157');
       });
     });
 
@@ -106,10 +120,9 @@ void main() {
         }
       }
 
-      timerObject.startPeriodic(
-          Duration(milliseconds: 10), (Timer t) => incrementCounter(t));
+      timerObject.startPeriodic(Duration(milliseconds: 10), incrementCounter);
 
-      checkCounter() {
+      void checkCounter() {
         expect(counter, 10);
         timerObject.dispose();
       }

@@ -61,7 +61,9 @@ class StreamedList<T> implements StreamedObject<List<T>> {
     }
 
     stream.onChange((data) {
-      _onChange(data);
+      if (_onChange != null) {
+        _onChange(data);
+      }
     });
   }
 
@@ -90,7 +92,7 @@ class StreamedList<T> implements StreamedObject<List<T>> {
   int get length => stream.value.length;
 
   /// This function will be called every time the stream updates.
-  void Function(List<T> data) _onChange = (data) {};
+  void Function(List<T> data) _onChange;
 
   /// Set the new value and update the stream
   set value(List<T> list) {

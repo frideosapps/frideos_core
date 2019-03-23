@@ -62,7 +62,7 @@ enum AnimatedType { increment, decrement }
 ///            children: <Widget>[
 ///              Container(height: 20.0,),
 ///              ValueBuilder<AnimatedStatus>(
-///                stream: bloc.scaleAnimation.status,
+///                streamed: bloc.scaleAnimation.status,
 ///                builder: (context, snapshot) {
 ///                 return Row(
 ///                    mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +97,7 @@ enum AnimatedType { increment, decrement }
 ///              ),
 ///              Expanded(
 ///                child: ValueBuilder<double>(
-///                    stream: bloc.scaleAnimation,
+///                    streamed: bloc.scaleAnimation,
 ///                    builder: (context, snapshot) {
 ///                      return Transform.scale(
 ///                          scale: snapshot.data, child: FlutterLogo());
@@ -121,6 +121,7 @@ class AnimatedObject<T> implements StreamedObject<T> {
 
   /// Getter for stream of the [StreamedValue] that holds the animation
   /// value.
+  @override
   Stream<T> get outStream => animation.outStream;
 
   /// Deprecated. use [outStream] instead, this is used by [ValueBuilder].

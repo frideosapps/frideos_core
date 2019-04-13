@@ -24,6 +24,20 @@ void main() {
       );
     });
 
+    test('StreamedValue initialData', () async {
+      final streamedValue = StreamedValue<int>(initialData: 99);
+
+      Timer.run(() {
+        streamedValue.value = 2;
+        streamedValue.value = 8;
+      });
+
+      expect(
+        streamedValue.outStream,
+        emitsInOrder(<int>[99, 2, 8]),
+      );
+    });
+
     test('onChange', () {
       final streamedValue = StreamedValue<int>();
 
@@ -60,6 +74,31 @@ void main() {
 
       streamedTransformed.onChange((value) {
         expect(value, '157');
+      });
+    });
+
+    test('StreamedTransformed initialValue', () {
+      final streamedTransformed =
+          StreamedTransformed<String, int>(initialData: '159');
+
+      final validateKey =
+          StreamTransformer<String, int>.fromHandlers(handleData: (key, sink) {
+        final k = int.tryParse(key);
+        if (k != null) {
+          sink.add(k);
+        } else {
+          sink.addError('The key must be an integer.');
+        }
+      });
+
+      streamedTransformed.setTransformer(validateKey);
+
+      streamedTransformed.outTransformed.listen((value) {
+        expect(value, 159);
+      });
+
+      streamedTransformed.onChange((value) {
+        expect(value, '159');
       });
     });
 

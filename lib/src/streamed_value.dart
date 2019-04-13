@@ -337,7 +337,7 @@ class TimerObject extends StreamedValue<int> {
   /// Update the time and send it to stream
   ///
   void updateTime(Timer t) {
-    _time += _interval.inMilliseconds;
+    _time = _interval.inMilliseconds * t.tick;
     inStream(_time);
   }
 
@@ -467,7 +467,7 @@ class TimerObject extends StreamedValue<int> {
 ///
 ///
 class StreamedTransformed<T, S> implements StreamedObject<T> {
-  StreamedTransformed() {
+  StreamedTransformed({this.initialData}) {
     stream = BehaviorSubject<T>()
       ..listen((e) {
         _lastValue = e;
@@ -475,9 +475,18 @@ class StreamedTransformed<T, S> implements StreamedObject<T> {
           _onChange(e);
         }
       });
+
+    if (initialData != null) {
+      _lastValue = initialData;
+      stream.sink.add(_lastValue);
+    }
   }
 
+  /// Last value emitted by the stream
   T _lastValue;
+
+  /// The initial event of the stream
+  T initialData;
 
   /// Value of the last event transformed
   S transformed;

@@ -1,3 +1,9 @@
+## Version 0.4.3 (13-04-19)
+- Improved TimerObject precision
+- Added `initialData` property to the `StreamedTransformed` class
+- Added some tests
+
+
 ## Version 0.4.2+1 (23-03-19)
 - Code refactoring
 - Added some tests
@@ -8,7 +14,7 @@
 - Code refactoring
 - `README.md` updated
 - Tests updated
-
+  
 
 ## Version 0.4.1 (16-03-19)
 

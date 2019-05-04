@@ -53,21 +53,23 @@ import '../frideos_core.dart';
 ///
 ///
 class StreamedMap<K, V> implements StreamedObject<Map<K, V>> {
-  StreamedMap({Map<K, V> initialData}) {
-    stream = StreamedValue<Map<K, V>>();
+  StreamedMap({Map<K, V> initialData, this.onError}) {
+    stream = StreamedValue<Map<K, V>>()
+      ..stream.stream.listen((data) {
+        if (_onChange != null) {
+          _onChange(data);
+        }
+      }, onError: onError);
 
     if (initialData != null) {
       stream.value = initialData;
     }
-
-    stream.onChange((data) {
-      if (_onChange != null) {
-        _onChange(data);
-      }
-    });
   }
 
   StreamedValue<Map<K, V>> stream;
+
+  /// Callback to handle the errors
+  final Function onError;
 
   /// Sink for the stream
   Function(Map<K, V>) get inStream => stream.inStream;

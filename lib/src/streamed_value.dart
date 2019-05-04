@@ -83,15 +83,14 @@ import 'interfaces/streamed_object.dart';
 ///
 ///
 class StreamedValue<T> implements StreamedObject<T> {
-  StreamedValue({this.initialData}) {
-    stream = BehaviorSubject<T>();
-
-    stream.stream.listen((e) {
-      _lastValue = e;
-      if (_onChange != null) {
-        _onChange(e);
-      }
-    });
+  StreamedValue({this.initialData, this.onError}) {
+    stream = BehaviorSubject<T>()
+      ..stream.listen((e) {
+        _lastValue = e;
+        if (_onChange != null) {
+          _onChange(e);
+        }
+      }, onError: onError);
 
     if (initialData != null) {
       _lastValue = initialData;
@@ -102,6 +101,9 @@ class StreamedValue<T> implements StreamedObject<T> {
   /// Stream of type [BehaviorSubject] in order to emit
   /// the last event to every new listener.
   BehaviorSubject<T> stream;
+
+  /// Callback to handle the errors
+  final Function onError;
 
   /// Stream getter
   @override
@@ -175,7 +177,8 @@ class StreamedValue<T> implements StreamedObject<T> {
 ///
 ///
 class MemoryValue<T> extends StreamedValue<T> {
-  MemoryValue({T initialData}) : super(initialData: initialData);
+  MemoryValue({T initialData, Function onError})
+      : super(initialData: initialData, onError: onError);
 
   T _oldValue;
 
@@ -203,7 +206,8 @@ class MemoryValue<T> extends StreamedValue<T> {
 /// is called to send it to the [_historyStream].
 ///
 class HistoryObject<T> extends MemoryValue<T> {
-  HistoryObject({T initialData}) : super(initialData: initialData);
+  HistoryObject({T initialData, Function onError})
+      : super(initialData: initialData, onError: onError);
 
   final _historyStream = StreamedList<T>(initialData: []);
 
@@ -467,14 +471,14 @@ class TimerObject extends StreamedValue<int> {
 ///
 ///
 class StreamedTransformed<T, S> implements StreamedObject<T> {
-  StreamedTransformed({this.initialData}) {
+  StreamedTransformed({this.initialData, this.onError}) {
     stream = BehaviorSubject<T>()
       ..listen((e) {
         _lastValue = e;
         if (_onChange != null) {
           _onChange(e);
         }
-      });
+      }, onError: onError);
 
     if (initialData != null) {
       _lastValue = initialData;
@@ -497,8 +501,10 @@ class StreamedTransformed<T, S> implements StreamedObject<T> {
   /// Debug mode (Default: false)
   bool _debugMode = false;
 
-  /// Stream
   BehaviorSubject<T> stream;
+
+  /// Callback to handle the errors
+  final Function onError;
 
   /// Sink for the stream
   Function get inStream => stream.sink.add;

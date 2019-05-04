@@ -53,22 +53,23 @@ import '../frideos_core.dart';
 ///
 ///
 class StreamedList<T> implements StreamedObject<List<T>> {
-  StreamedList({List<T> initialData}) {
-    stream = StreamedValue<List<T>>();
+  StreamedList({List<T> initialData, this.onError}) {
+    stream = StreamedValue<List<T>>()
+      ..stream.listen((data) {
+        if (_onChange != null) {
+          _onChange(data);
+        }
+      }, onError: onError);
 
     if (initialData != null) {
       stream.value = initialData;
     }
-
-    stream.onChange((data) {
-      if (_onChange != null) {
-        _onChange(data);
-      }
-    });
   }
 
-  /// Stream
   StreamedValue<List<T>> stream;
+
+  /// Callback to handle the errors
+  final Function onError;
 
   /// Sink for the stream
   Function(List<T>) get inStream => stream.inStream;

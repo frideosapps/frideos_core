@@ -1,6 +1,9 @@
 # frideos_core [![pub package](https://img.shields.io/pub/v/frideos_core.svg)](https://pub.dartlang.org/packages/frideos_core)
 
-A library for streams, BLoC pattern, tunnel pattern, timing and animations. Core of the [frideos](https://pub.dartlang.org/packages/frideos) and [frideos_light](https://pub.dartlang.org/packages/frideos_light) package.
+A library for streams, BLoC pattern, tunnel pattern, timing and animations. Core of the following packages:
+- [frideos](https://pub.dartlang.org/packages/frideos)
+- [frideos_light](https://pub.dartlang.org/packages/frideos_light)
+- [frideos_kvprx](https://pub.dartlang.org/packages/frideos_kvprx) 
 
 #### [Classes for streams and BLoC pattern](#streams-and-bloc-pattern):
 

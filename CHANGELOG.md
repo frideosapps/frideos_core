@@ -1,3 +1,6 @@
+## Version 0.4.4 (04-05-19)
+- Added the `onError` callback to the StreamedObject derived classes
+
 ## Version 0.4.3 (13-04-19)
 - Improved TimerObject precision
 - Added `initialData` property to the `StreamedTransformed` class

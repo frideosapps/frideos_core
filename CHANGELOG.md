@@ -1,4 +1,4 @@
-## Version 0.5.0 (21-06-19)
+## Version 0.5.0+1 (21-06-19)
 - Updated to RxDart 0.22.0.
 
 

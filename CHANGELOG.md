@@ -1,3 +1,7 @@
+## Version 0.5.0 (21-06-19)
+- Updated to RxDart 0.22.0.
+
+
 ## Version 0.4.4 (04-05-19)
 - Added the `onError` callback to the StreamedObject derived classes
 

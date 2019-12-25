@@ -1,5 +1,4 @@
 name: frideos_core
-author: Francesco Mineo <frideosapps@gmail.com>
 homepage: https://github.com/frideosapps/frideos_core
 description: A library for streams, BLoC pattern, tunnel pattern, timing and animations. Core of the frideos package.
 version: 0.6.0

@@ -1,9 +1,15 @@
+## Version 0.6.0 (25-12-19)
+- Updated to RxDart 0.23.1.
+- Added a new method "sendParagraph" in the Utils class.
+
+
 ## Version 0.5.0+1 (21-06-19)
 - Updated to RxDart 0.22.0.
 
 
 ## Version 0.4.4 (04-05-19)
 - Added the `onError` callback to the StreamedObject derived classes
+
 
 ## Version 0.4.3 (13-04-19)
 - Improved TimerObject precision
@@ -15,7 +21,7 @@
 - Code refactoring
 - Added some tests
 - Updated README.md
-
+  
 
 ## Version 0.4.2 (19-03-19)
 - Code refactoring

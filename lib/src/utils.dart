@@ -44,6 +44,31 @@ class Utils {
     return timer;
   }
 
+  static Timer sendParagraph(
+      String text, StreamedValue stream, int milliseconds,
+      [int duration]) {
+    int index = 0;
+    Timer timer;
+
+    final int refresh =
+        duration != null ? (duration ~/ text.length).toInt() : milliseconds;
+
+    final words = text.split(' ');
+
+    timer = Timer.periodic(Duration(milliseconds: refresh), (Timer t) {
+      if (index <= words.length - 1) {
+        final toShow = words.take(index + 1);
+        stream.value = toShow;
+
+        print(toShow);
+        index++;
+      } else {
+        timer.cancel();
+      }
+    });
+    return timer;
+  }
+
   static double convertRange(
       double _min, double _max, double min, double max, double value) {
     final deltaValue = value - _min;
